@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import Loader from "./components/loader/Loader";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  // loader state
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Let create async method to fetch fake data
+  useEffect(() => {
+    const fakeDataFetch = () => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 4000);
+    };
+
+    fakeDataFetch();
+  }, []);
+
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <h1 className="welcome-text">Welcome to Preloading Application! 👋🏻</h1>
   );
 }
 
